@@ -3,6 +3,7 @@ import Header from "../layout/Header";
 import "../styles-c/StyledLeaderboard.css";
 import { mock_scores } from "../mock-resources/scores";
 import CurrentScore from "../components/CurrentScore";
+import Button from "../components/Button";
 
 export type ScorePayload = {
   name: string;
@@ -31,6 +32,7 @@ export default function Leaderboard() {
           })}
         </div>
       )}
+      <Button />
     </div>
   );
 }
