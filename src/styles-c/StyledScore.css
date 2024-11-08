@@ -1,0 +1,23 @@
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 600;
+  height: 5rem;
+}
+.score-row div:nth-child(1) {
+  margin-left: 4rem;
+}
+.score-row div:nth-child(2) {
+  margin-right: 4rem;
+  color: yellow;
+  font-weight: 800;
+}
+
+.highlighted {
+  background-color: rgb(98, 132, 235);
+}
+
+/*# sourceMappingURL=StyledScore.css.map */
