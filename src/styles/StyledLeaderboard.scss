@@ -28,14 +28,34 @@
     div {
       padding-left: 3rem;
       font-weight: 700;
-      font-size: 105px;
+      font-size: 115px;
     }
   }
   #scoreContainer {
     margin-top: 4rem;
     width: 100%;
+    height: 35rem;
     display: flex;
     flex-direction: column;
-    height: 35rem;
   }
+  .button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 8rem;
+    input[type="submit"] {
+       width: 25rem;
+       border-radius: 10px;
+       color: royalblue;
+       font-size: 50px;
+       font-weight: 700;
+       border: none;
+       outline: 1px solid rgb(120, 146, 226);
+       transition: 100ms;
+       &:hover {
+           outline-offset: 5px;
+           transition: 200ms;
+       }
+    }
+   }
 }

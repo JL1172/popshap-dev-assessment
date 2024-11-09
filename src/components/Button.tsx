@@ -1,8 +1,6 @@
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import "../styles-c/StyledButton.css";
 import React from "react";
-
-export default function Button() {
+export default function Button(props: { text: string }) {
   const nav: NavigateFunction = useNavigate();
   const navigateToAddScoreForm = (
     e: React.MouseEvent<HTMLInputElement>
@@ -14,7 +12,7 @@ export default function Button() {
     <div className="button-wrapper">
       <input
         type="submit"
-        value="Add a Score"
+        value={props.text}
         onClick={(e: React.MouseEvent<HTMLInputElement>) =>
           navigateToAddScoreForm(e)
         }

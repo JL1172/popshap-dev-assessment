@@ -13,6 +13,7 @@ export type ScorePayload = {
 export default function Leaderboard() {
   const [scores, setScores] = useState<ScorePayload[] | null>(null);
   useEffect(() => {
+    window.localStorage.clear();
     const copy_of_mock_scores: ScorePayload[] = [...mock_scores]
       .slice(0, 5)
       .sort((a, b) => b.score - a.score);
@@ -32,7 +33,7 @@ export default function Leaderboard() {
           })}
         </div>
       )}
-      <Button />
+      <Button text="Add a Score" />
     </div>
   );
 }
