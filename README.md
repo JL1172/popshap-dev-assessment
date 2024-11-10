@@ -1,50 +1,40 @@
-# React + TypeScript + Vite
+# Project Name
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is an application designed with a 1080px * 1920px layout, following the design file and guidelines provided. The app includes graceful error handling for both known and unexpected errors, ensuring a smooth user experience.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Serverless Implementation**: Utilizes Firebase for a serverless backend.
+- **Graceful UI**: Uses `react-spinner` to show a loading UI while updating the database.
+- **Seamless Navigation**: Implements `react-router-dom` for smooth and intuitive page navigation.
+- **Scalability & Design Principles**: Abstracted features are designed to follow battle-tested design principles with scalability in mind.
+- **State Management**: Custom hooks and Context API are used for managing and sharing the simple state across the application.
 
-## Expanding the ESLint configuration
+## Dependencies
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- `firebase`: For serverless backend services.
+- `react-spinner`: For a graceful loading UI during database updates.
+- `react-router-dom`: For seamless navigation between pages.
+  
+## Design & Architecture
 
-- Configure the top-level `parserOptions` property like this:
+The design was incorporated from the provided design file while adhering to established design principles. I aimed to keep the codebase minimal by utilizing only the requested dependencies and focusing on scalability. Custom hooks and Context API are employed to manage the application's simple state, making it easy to extend in the future.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Error Handling
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+The application gracefully handles both known and unexpected errors to ensure a smooth user experience. Error states are displayed clearly, but without exposing sensitive information.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Installation
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+To run this project locally:
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+
+   cd <into project>
+
+   npm install 
+
+   npm run dev
+   ```
