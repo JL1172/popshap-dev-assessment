@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 export default function Form() {
   const ctx = useContext(AddScoreCtx);
   const nav = useNavigate();
-  console.log(ctx?.data);
   return (
     <form
       onSubmit={(e: React.MouseEvent<HTMLFormElement, MouseEvent>) =>

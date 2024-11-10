@@ -4,11 +4,13 @@ import { initialState, useForm } from "../hooks/useForm";
 import { AddScoreCtx } from "../contexts/AddScoreCtx";
 import Form from "../components/Form";
 import Loader from "../components/Loader";
+import Alert, { ALERT_TYPE } from "../components/Alert";
 
 export default function AddScoreForm() {
-  const [data, changeHandler, submit] = useForm(initialState);
+  const [data, changeHandler, submit, error] = useForm(initialState);
   return (
-    <AddScoreCtx.Provider value={{ data, changeHandler, submit }}>
+    <AddScoreCtx.Provider value={{ data, changeHandler, submit, error }}>
+      <Alert type={ALERT_TYPE.FAILURE} message = {error}/>
       {data?.isLoading ? (
         <Loader />
       ) : (

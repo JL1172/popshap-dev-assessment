@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavigateFunction } from "react-router-dom";
+import { FirebaseService } from "../services/firebase";
 
 export type InitialType = {
   fName: string;
@@ -31,10 +32,13 @@ export const useForm = (
   (
     e: React.MouseEvent<HTMLInputElement | HTMLFormElement, MouseEvent>,
     nav: NavigateFunction
-  ) => Promise<void>
+  ) => Promise<void>,
+  string
 ] => {
   // const [data, setData] = useLocalStorage(key, initialValue);
   const [data, setData] = useState<InitialType>(initialValue);
+  const [error, setError] = useState("");
+  const dbInstance = new FirebaseService();
 
   const changeHandler = (
     name: string,
@@ -69,8 +73,10 @@ export const useForm = (
   ): Promise<void> => {
     e.preventDefault();
     changeHandler("isLoading", true);
+    setError("");
     try {
       handleErrors();
+      await dbInstance.addPlayer(data.fName, data.lName, Number(data.score));
       setData(initialValue);
       nav("/");
     } catch (err) {
@@ -82,11 +88,16 @@ export const useForm = (
           }))
         );
       } else {
-        //other logic
+        setError(
+          "An unexpected problem occurred, if problem persists, contact admin"
+        );
+        setTimeout(() => {
+          setError("");
+        }, 2500);
       }
     } finally {
       changeHandler("isLoading", false);
     }
   };
-  return [data, changeHandler, submit];
+  return [data, changeHandler, submit, error];
 };

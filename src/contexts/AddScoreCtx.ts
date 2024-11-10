@@ -9,6 +9,7 @@ export type AddScoreCtxType = {
     e: React.MouseEvent<HTMLInputElement | HTMLFormElement, MouseEvent>,
     nav: NavigateFunction
   ) => void;
+  error: string;
 };
 
 export const AddScoreCtx = createContext<AddScoreCtxType | undefined>(

@@ -11,7 +11,7 @@ export default function CurrentScore(props: ScorePayload) {
       }
     >
       <div>
-        {props?.place}. {props.name}
+        {props?.place}. {props.fName} {props.lName[0]}.
       </div>
       <div>{props.score}</div>
     </div>

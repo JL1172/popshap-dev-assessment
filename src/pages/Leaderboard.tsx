@@ -1,39 +1,37 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Header from "../layout/Header";
 import "../styles-c/StyledLeaderboard.css";
-import { mock_scores } from "../mock-resources/scores";
 import CurrentScore from "../components/CurrentScore";
 import Button from "../components/Button";
+import { useLeaderboard } from "../hooks/useLeaderboard";
+import Alert, { ALERT_TYPE } from "../components/Alert";
 
 export type ScorePayload = {
-  name: string;
+  fName: string;
+  lName: string;
   score: number;
   place?: number;
 };
 
 export default function Leaderboard() {
-  const [scores, setScores] = useState<ScorePayload[] | null>(null);
+  const [players, getTopPlayers, error] = useLeaderboard();
   useEffect(() => {
-    window.localStorage.clear();
-    const copy_of_mock_scores: ScorePayload[] = [...mock_scores]
-      .slice(0, 5)
-      .sort((a, b) => b.score - a.score);
-    setScores(copy_of_mock_scores);
-  }, []);
+    getTopPlayers();
+  }, []);//eslint-disable-line
   return (
     <div className="container">
+      <Alert type={ALERT_TYPE.FAILURE} message={error} />
       <Header />
       <div id="heading">
         <div>Current</div>
         <div> Scores.</div>
       </div>
-      {scores !== null && (
-        <div id="scoreContainer">
-          {scores.map((n: ScorePayload, i: number) => {
+      <div id="scoreContainer">
+        {players.length > 0 &&
+          players.map((n: ScorePayload, i: number) => {
             return <CurrentScore {...{ ...n, place: i + 1 }} key={i} />;
           })}
-        </div>
-      )}
+      </div>
       <Button text="Add a Score" />
     </div>
   );

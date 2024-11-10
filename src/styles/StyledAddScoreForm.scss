@@ -107,6 +107,7 @@
     justify-content: center;
     height: 8rem;
     input[type="submit"] {
+      cursor: pointer;
        width: 32rem;
        border-radius: 10px;
        color: royalblue;
@@ -114,10 +115,10 @@
        font-weight: 700;
        border: none;
        outline: 1px solid rgb(120, 146, 226);
-       transition: 100ms;
+       transition: 100ms ease-in-out;
        &:hover {
            outline-offset: 5px;
-           transition: 200ms;
+           transition: 200ms ease-in-out;
        }
     }
    }
