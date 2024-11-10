@@ -10,6 +10,7 @@ export type ScorePayload = {
   score: number;
   place?: number;
 };
+
 export default function Leaderboard() {
   const [scores, setScores] = useState<ScorePayload[] | null>(null);
   useEffect(() => {

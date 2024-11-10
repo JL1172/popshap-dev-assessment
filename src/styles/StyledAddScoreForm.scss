@@ -35,7 +35,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 50rem;
+    min-height: 50rem;
+    height: fit-content;
     width: 100%;
     .form-field {
       display: flex;
@@ -119,5 +120,14 @@
            transition: 200ms;
        }
     }
+   }
+   .error {
+    outline: 1px solid rgb(212, 107, 107);
+   }
+   .error-message {
+    color: rgb(212, 107, 107);
+   }
+   .error-message:nth-child(3) {
+    margin-top: 5px;
    }
 }

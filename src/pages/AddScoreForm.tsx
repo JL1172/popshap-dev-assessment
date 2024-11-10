@@ -6,10 +6,7 @@ import Form from "../components/Form";
 import Loader from "../components/Loader";
 
 export default function AddScoreForm() {
-  const [data, changeHandler, submit] = useForm(
-    "persistAddScoreFormState",
-    initialState
-  );
+  const [data, changeHandler, submit] = useForm(initialState);
   return (
     <AddScoreCtx.Provider value={{ data, changeHandler, submit }}>
       {data?.isLoading ? (

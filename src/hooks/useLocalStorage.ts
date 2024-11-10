@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { InitialType } from "./useForm";
 
+//* optional feature for persisting state despite page refresh
 export const useLocalStorage = (
   key: string,
   initialState: InitialType

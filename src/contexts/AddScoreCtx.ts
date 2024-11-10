@@ -6,7 +6,7 @@ export type AddScoreCtxType = {
   data: InitialType;
   changeHandler: (name: string, value: string | boolean | number) => void;
   submit: (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
+    e: React.MouseEvent<HTMLInputElement | HTMLFormElement, MouseEvent>,
     nav: NavigateFunction
   ) => void;
 };

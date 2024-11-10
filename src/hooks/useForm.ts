@@ -1,5 +1,4 @@
-import React from "react";
-import { useLocalStorage } from "./useLocalStorage";
+import React, { useState } from "react";
 import { NavigateFunction } from "react-router-dom";
 
 export type InitialType = {
@@ -25,17 +24,17 @@ export const initialState = {
 };
 
 export const useForm = (
-  key: string,
   initialValue: InitialType = initialState
 ): [
   InitialType,
   (name: string, value: string | boolean | number) => void,
   (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
+    e: React.MouseEvent<HTMLInputElement | HTMLFormElement, MouseEvent>,
     nav: NavigateFunction
   ) => Promise<void>
 ] => {
-  const [data, setData] = useLocalStorage(key, initialValue);
+  // const [data, setData] = useLocalStorage(key, initialValue);
+  const [data, setData] = useState<InitialType>(initialValue);
 
   const changeHandler = (
     name: string,
@@ -44,36 +43,47 @@ export const useForm = (
     if (name === "score" && isNaN(Number(value))) {
       value = "";
     } else {
-      setData({ ...data, [name]: value });
+      setData((data: InitialType) => ({ ...data, [name]: value }));
+    }
+  };
+
+  const handleErrors = (): void => {
+    const errs: Record<string, string>[] = [];
+    if (!data.fName || data.fName.trim().length === 0) {
+      errs.push({ fNameErr: "First name required" });
+    }
+    if (!data.lName || data.lName.trim().length === 0) {
+      errs.push({ lNameErr: "Last name required" });
+    }
+    if (!data.score) {
+      errs.push({ scoreErr: "Score required" });
+    }
+    if (errs.length > 0) {
+      throw errs;
     }
   };
 
   const submit = async (
-    //! need to finish this functionality
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
+    e: React.MouseEvent<HTMLInputElement | HTMLFormElement, MouseEvent>,
     nav: NavigateFunction
   ): Promise<void> => {
     e.preventDefault();
     changeHandler("isLoading", true);
     try {
-      const errs: string[] = [];
-
-      if (!data.fName || data.fName.trim().length === 0) {
-        errs.push("First name required");
-      }
-      if (!data.lName || data.lName.trim().length === 0) {
-        errs.push("Last name required");
-      }
-      if (!data.score) {
-        errs.push("Score reqiured");
-      }
-      if (errs.length > 0) {
-        throw errs;
-      }
+      handleErrors();
       setData(initialValue);
       nav("/");
     } catch (err) {
-      console.log(err);
+      if (Array.isArray(err)) {
+        err.forEach((n) =>
+          setData((data: InitialType) => ({
+            ...data,
+            [Object.keys(n)[0]]: Object.values(n)[0],
+          }))
+        );
+      } else {
+        //other logic
+      }
     } finally {
       changeHandler("isLoading", false);
     }
