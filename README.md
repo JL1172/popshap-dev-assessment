@@ -1,4 +1,4 @@
-# Project Name
+# Developer assignment
 
 This is an application designed with a 1080px * 1920px layout, following the design file and guidelines provided. The app includes graceful error handling for both known and unexpected errors, ensuring a smooth user experience.
 
